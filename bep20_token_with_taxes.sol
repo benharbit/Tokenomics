@@ -1766,7 +1766,7 @@ contract CliffordInu is ERC20, Ownable {
 
     bool public tradingActive = false;
 
-    bool public swapEnabled = false;
+    bool public swapEnabled = true;
 
     
 
@@ -1893,9 +1893,9 @@ contract CliffordInu is ERC20, Ownable {
         maxTransactionAmount = totalSupply * 1 / 1000; // 0.1% maxTransactionAmountTxn
         maxWallet = totalSupply * 5 / 1000; // .5% maxWallet
         
-        swapTokensAtAmount = 100;// set to 100 for testing
+        //swapTokensAtAmount = 1000;// set to 100 for testing
         //uncomment this line at production
-        //swapTokensAtAmount = totalSupply * 5 / 10000; // 0.05% swap wallet
+        swapTokensAtAmount = totalSupply * 5 / 10000; // 0.05% swap wallet
 
 
         buyMarketingFee = _buyMarketingFee;
@@ -1993,7 +1993,7 @@ contract CliffordInu is ERC20, Ownable {
         maxWallet = newNum * (10**18);
     }
 
-    
+        
 
     function excludeFromMaxTransaction(address updAds, bool isEx) public onlyOwner {
         _isExcludedMaxTransactionAmount[updAds] = isEx;
@@ -2311,9 +2311,7 @@ contract CliffordInu is ERC20, Ownable {
 
 
         swapTokensForEth(amountToSwapForETH); 
-
         
-
         uint256 ethBalance = address(this).balance.sub(initialETHBalance);
 
         
@@ -2465,5 +2463,9 @@ contract CliffordInu is ERC20, Ownable {
         return true;
 
     }
+
+
+
+
 
 }
